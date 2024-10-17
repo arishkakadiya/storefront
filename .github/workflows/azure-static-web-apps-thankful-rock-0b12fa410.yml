@@ -11,6 +11,7 @@ on:
 
 jobs:
   build_and_deploy_job:
+     
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
@@ -32,6 +33,9 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+           env: 
+      VUE_APP_ORDER_SERVICE_URL: https://order-service.fake.net/
+      VUE_APP_PRODUCT_SERVICE_URL: https://product-service.fake.net/
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
